@@ -6,9 +6,9 @@
         </div>
 
         <div class="collapse navbar-collapse" [@headerState]="authService.isLoggedIn == true ? 'active' : 'inactive'">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" >
                 <li>
-                    <a>
+                    <a [routerLink]="['/account']">
                         <p>Account</p>
                     </a>
                 </li>

@@ -32,6 +32,12 @@ import 'rxjs/add/operator/filter';
 })
 
 export class SidebarComponent implements OnInit {
+  private menuItems: any[] = [
+    { text: 'Clients', path: '/client' },
+    { text: 'Sessions', path: '/session' },
+    { text: 'Invoices', path: '/invoice' },
+  ]
+
   constructor(private router: Router, private authService: AuthService) {
 
   }

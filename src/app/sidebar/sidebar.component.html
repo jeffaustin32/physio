@@ -1,30 +1,18 @@
 <div class="sidebar" data-color="red">
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a class="simple-text">
+            <a class="simple-text" [routerLink]="['/dashboard']">
                 <div class="logo-img">
-                    <img src="/assets/physio-logo.png" />
+                    <img src="/assets/physio-logo.png"/>
                 </div>
                 Alice Physio
             </a>
         </div>
         <ul class="nav" [@flyInOut]="authService.isLoggedIn == true ? 'in' : 'out'">
-            <li>
-                <a>
-                    <i class="menuItem"></i>
-                    <p>Menu Item #1</p>
-                </a>
-            </li>
-             <li>
-                <a>
-                    <i class="menuItem"></i>
-                    <p>Menu Item #2</p>
-                </a>
-            </li>
-             <li>
-                <a>
-                    <i class="menuItem"></i>
-                    <p>Menu Item #3</p>
+            <li routerLinkActive="active" *ngFor="let menuItem of menuItems">
+                <a [routerLink]="[menuItem.path]">
+                    <!-- TODO: Add icons <i class="{{menuItem.icon}}"></i>-->
+                    <p>{{menuItem.text}}</p>
                 </a>
             </li>
         </ul>
