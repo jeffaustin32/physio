@@ -15,38 +15,38 @@ import { HeaderComponent } from './header/header.component';
 
 // Content components
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ClientComponent } from './clients/client/client.component';
-import { SessionComponent } from './sessions/session/session.component';
-import { InvoiceComponent } from './invoices/invoice/invoice.component';
-import { AccountComponent } from './account/account.component';
+import { InvoiceModule, invoiceModuleRoutes } from './invoices/invoice.module';
+import { DashboardModule, dashboardModuleRoutes } from './dashboard/dashboard.module';
+import { ClientModule, clientModuleRoutes } from './clients/client.module';
+import { SessionModule, sessionModuleRoutes } from './sessions/session.module';
+import { AccountModule, accountModuleRoutes } from './account/account.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     LoginComponent,
-    HeaderComponent,
-    ClientComponent,
-    SessionComponent,
-    InvoiceComponent,
-    AccountComponent,
-    DashboardComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    InvoiceModule,
+    RouterModule.forRoot(invoiceModuleRoutes),
+    DashboardModule,
+    RouterModule.forRoot(dashboardModuleRoutes),
+    ClientModule,
+    RouterModule.forRoot(clientModuleRoutes),
+    SessionModule,
+    RouterModule.forRoot(sessionModuleRoutes),
+    AccountModule,
+    RouterModule.forRoot(accountModuleRoutes),
     RouterModule.forRoot([
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-      { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
-      { path: 'client', canActivate: [AuthGuard], component: ClientComponent },
-      { path: 'session', canActivate: [AuthGuard], component: SessionComponent },
-      { path: 'invoice', canActivate: [AuthGuard], component: InvoiceComponent },
-      { path: 'account', canActivate: [AuthGuard], component: AccountComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login' }
-    ]),
+    ])
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
