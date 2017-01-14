@@ -9,6 +9,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuard } from './services/auth-guard/auth-guard.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,10 +26,11 @@ import { HeaderComponent } from './header/header.component';
     RouterModule.forRoot([
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
+      { path: 'loggedIn', canActivate: [AuthGuard], component: LoginComponent },
       { path: '**', redirectTo: 'login' }
     ]),
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
