@@ -28,6 +28,7 @@ import { Component, OnInit, AfterViewInit, trigger, state, style, transition, an
     ])
   ],
 })
+
 export class CardComponent implements OnInit {
   @Input() private header: string;
   
