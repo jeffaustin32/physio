@@ -2,6 +2,7 @@ import { Component, OnInit, trigger, state, style, transition, animate, keyframe
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth/auth.service';
+import { MENU_ITEMS } from './sidebar.menu-items';
 
 import 'rxjs/add/operator/filter';
 
@@ -32,14 +33,9 @@ import 'rxjs/add/operator/filter';
 })
 
 export class SidebarComponent implements OnInit {
-  private menuItems: any[] = [
-    { text: 'Clients', path: '/client' },
-    { text: 'Sessions', path: '/session' },
-    { text: 'Invoices', path: '/invoice' },
-  ]
-
+  private menuItems: any[] = MENU_ITEMS;
+  
   constructor(private router: Router, private authService: AuthService) {
-
   }
 
   ngOnInit() {
