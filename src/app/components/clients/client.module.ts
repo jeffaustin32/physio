@@ -1,11 +1,13 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
 
 import { ClientComponent } from './client/client.component';
 import { SharedModule } from '../../shared/shared.module';
+import { SelectedClientComponent } from './selected-client/selected-client.component';
 
 import { AuthGuard } from '../../services/auth-guard/auth-guard.service';
-import { SelectedClientComponent } from './selected-client/selected-client.component';
+import { ClientService } from '../../services/client/client.service';
 
 export const clientModuleRoutes: Route[] = [
   {
@@ -39,7 +41,11 @@ export const clientModuleRoutes: Route[] = [
   ],
   imports: [
     SharedModule,
-    RouterModule
+    RouterModule,
+    BrowserModule
+  ],
+  providers: [
+    ClientService
   ]
 })
 export class ClientModule { }

@@ -3,6 +3,12 @@
     <a [routerLink]="[{ outlets: { client: ['details', 123] } }]">Details</a>
     <a [routerLink]="[{ outlets: { client: ['edit', 88] } }]">edit</a>
     <a [routerLink]="[{ outlets: { client: ['thirdParty', 126516231] } }]">thirdParty</a>
+
+    <ul>
+      <li *ngFor="let client of clients">
+       {{ client.first_name }}
+      </li>
+    </ul>
   </card>
 
   <div class="col-md-8">
