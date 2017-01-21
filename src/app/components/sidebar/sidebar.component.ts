@@ -1,7 +1,7 @@
 import { Component, OnInit, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { MENU_ITEMS } from './sidebar.menu-items';
 
 import 'rxjs/add/operator/filter';

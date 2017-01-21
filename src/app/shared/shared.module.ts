@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CardComponent } from './card/card.component';
+import { TextFilterPipe } from '../pipes/textfilter.pipe';
 
 @NgModule({
   declarations: [
-    CardComponent
+    CardComponent,
+    TextFilterPipe
   ],
   exports: [
-      CardComponent
+      CardComponent,
+      TextFilterPipe
   ]
 })
 export class SharedModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'header-nav',
@@ -23,7 +23,7 @@ import { AuthService } from '../services/auth/auth.service';
 export class HeaderComponent implements OnInit {
   private title: string = 'Dashboard';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
   logout() {
     this.authService.logout();
@@ -31,6 +31,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+  this.route.url.subscribe((event) => { console.log('change') });
   }
-
 }

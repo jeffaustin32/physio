@@ -10,16 +10,17 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth-guard/auth-guard.service';
 
 // Layout Components
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HeaderComponent } from './components/header/header.component';
 
 // Content components
-import { LoginComponent } from './login/login.component';
-import { InvoiceModule, invoiceModuleRoutes } from './invoices/invoice.module';
-import { DashboardModule, dashboardModuleRoutes } from './dashboard/dashboard.module';
-import { ClientModule, clientModuleRoutes } from './clients/client.module';
-import { SessionModule, sessionModuleRoutes } from './sessions/session.module';
-import { AccountModule, accountModuleRoutes } from './account/account.module';
+import { LoginComponent } from './components/login/login.component';
+import { InvoiceModule, invoiceModuleRoutes } from './components/invoices/invoice.module';
+import { DashboardModule, dashboardModuleRoutes } from './components/dashboard/dashboard.module';
+import { ClientModule, clientModuleRoutes } from './components/clients/client.module';
+import { SessionModule, sessionModuleRoutes } from './components/sessions/session.module';
+import { AccountModule, accountModuleRoutes } from './components/account/account.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AccountModule, accountModuleRoutes } from './account/account.module';
     HeaderComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     FormsModule,
     HttpModule,
