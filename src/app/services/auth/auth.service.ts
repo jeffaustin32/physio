@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 
+import { ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/timeout';
@@ -10,12 +11,17 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthService {
   public isLoggedIn: boolean = false;
+  public loggedIn: ReplaySubject<any> = new ReplaySubject(1);
 
   // Store the URL so we can redirect after logging in
   public redirectUrl: string;
   private baseUrl: string = 'http://localhost:3000/api'
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: Http, private router: Router) {
+    if (this.isAuthorized()) {
+      this.loggedIn.next(true);
+    }
+  }
 
   login(credentials) {
     // Make a login request to the server
@@ -28,9 +34,9 @@ export class AuthService {
         .subscribe(
         (res) => {
           // Store the token in local storage
-          console.log(res.data);
           localStorage.setItem('token', JSON.stringify(res.data));
           this.isLoggedIn = true;
+          this.loggedIn.next(true);
 
           subscriber.next();
           subscriber.complete();
@@ -58,6 +64,7 @@ export class AuthService {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
     this.isLoggedIn = false;
+    this.loggedIn.next(false);
   }
 
   // Check if the user data and token exist in storage

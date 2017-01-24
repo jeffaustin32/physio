@@ -1,17 +1,24 @@
+<div class="row" *ngIf="!editMode">
+  <clients-list 
+    class="col-md-4"
+    (selectionChange)="selectionChange($event)">
+  </clients-list>
+
+  <selected-client 
+    *ngIf="selectedClient" 
+    [selectedClient]="selectedClient" 
+    class="col-md-8" 
+    (onEdit)="changeMode()">
+  </selected-client>
+</div>
+
 <div class="row">
-  <card header="Clients" class="col-md-4">
-    <a [routerLink]="[{ outlets: { client: ['details', 123] } }]">Details</a>
-    <a [routerLink]="[{ outlets: { client: ['edit', 88] } }]">edit</a>
-    <a [routerLink]="[{ outlets: { client: ['thirdParty', 126516231] } }]">thirdParty</a>
-
-    <ul>
-      <li *ngFor="let client of clients">
-       {{ client.first_name }}
-      </li>
-    </ul>
-  </card>
-
-  <div class="col-md-8">
-    <router-outlet name="client"></router-outlet>
-  </div>
+  <edit-client 
+    *ngIf="editMode" 
+    [selectedClient]="selectedClient" 
+    class="col-md-12" 
+    (onDelete)="changeMode()" 
+    (onCancel)="changeMode()"
+    (onSave)="changeMode()">
+  </edit-client>
 </div>

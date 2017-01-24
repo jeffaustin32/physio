@@ -8,7 +8,7 @@
         <div class="input-group">
           <input type="text" class="form-control" id="username" placeholder="Username" required [(ngModel)]="credentials.username"
             name="username" #username="ngModel">
-          <div class="input-group-addon">
+          <div class="input-group-addon row">
             <div style="color:#FF0000;" @inputError *ngIf="!username.valid && username.touched">Required</div>
           </div>
         </div>
@@ -35,8 +35,10 @@
           <button (click)="login()" class="btn btn-info btn-fill pull-right" [disabled]="!username.valid || !password.valid">Log in</button>
         </div>
       </div>
+
     </form>
-    
+
     <div class="clearfix"></div>
+    
   </card>
 </div>

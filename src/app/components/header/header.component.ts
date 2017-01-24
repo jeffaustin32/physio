@@ -9,21 +9,24 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./header.component.css'],
   animations: [
     trigger('headerState', [
-      state('inactive', style({
-        opacity: '0',
-      })),
-      state('active', style({
-        opacity: '*',
-      })),
-      transition('inactive => active', animate('200ms ease-in')),
-      transition('active => inactive', animate('200ms ease-out'))
+      transition('void => *', [
+        style({ opacity: '0' }),
+        animate('200ms ease-in'),
+      ]),
+      transition('* => void', [
+        style({ opacity: '*' }),
+        animate('200ms ease-out')
+      ])
     ])
   ]
 })
 export class HeaderComponent implements OnInit {
   private title: string = 'Dashboard';
+  private isLoggedIn: boolean = false;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { 
+    this.authService.loggedIn.subscribe(status => this.isLoggedIn = status);
+  }
 
   logout() {
     this.authService.logout();

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from '../../../services/client/client.service';
+import { Router } from '@angular/router';
+
+import { ClientModel } from '../../../models/client/client.model';
 
 @Component({
   selector: 'app-client',
@@ -7,19 +9,24 @@ import { ClientService } from '../../../services/client/client.service';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-  private clients = [{ 'first_name': 'jeff' }, { 'first_name': 'jhon' }];
+  private selectedClient:ClientModel;
+  private editMode:boolean = false;
 
-  constructor(public clientService: ClientService) {
-    this.clientService.getAllClients()
-      .subscribe((newClients) => {
-        this.clients = newClients;
-      }, (err) => {
-        console.log(err);
-      });
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
 
   }
 
+  selectionChange(client) {
+    this.selectedClient = client;
+  }
+
+  changeMode() {
+    console.log(this.editMode);
+    this.editMode = !this.editMode;
+
+    console.log(this.editMode);
+  }
 }

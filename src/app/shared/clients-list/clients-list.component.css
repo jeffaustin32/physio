@@ -1,0 +1,4 @@
+.selected {
+    background-color:#f16168 !important;
+    transition: background-color 200ms ease-in-out;
+}
