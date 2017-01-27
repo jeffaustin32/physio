@@ -24,8 +24,9 @@ export class HeaderComponent implements OnInit {
   private title: string = 'Dashboard';
   private isLoggedIn: boolean = false;
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { 
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) {
     this.authService.loggedIn.subscribe(status => this.isLoggedIn = status);
+    this.route.url.subscribe((event) => { console.log('change', event) });
   }
 
   logout() {
@@ -34,6 +35,5 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-  this.route.url.subscribe((event) => { console.log('change') });
   }
 }

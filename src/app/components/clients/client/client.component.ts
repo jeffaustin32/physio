@@ -24,9 +24,6 @@ export class ClientComponent implements OnInit {
   }
 
   changeMode() {
-    console.log(this.editMode);
     this.editMode = !this.editMode;
-
-    console.log(this.editMode);
   }
 }

@@ -34,8 +34,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>Country</label>
-                        <input type="text" class="form-control" placeholder="Country" [(ngModel)]="selectedClient.country" name="country">
+                        <label>Province</label>
+                        <input type="text" class="form-control" placeholder="Province" [(ngModel)]="selectedClient.province" name="province">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -71,7 +71,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Notes about selectedClient</label>
-                        <textarea rows="5" class="form-control" placeholder="Notes" value="Mike"></textarea>
+                        <textarea rows="5" class="form-control" placeholder="Notes" [(ngModel)]="selectedClient.notes" name="notes"></textarea>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+// Models
 import { ClientModel } from '../../../models/client/client.model';
+
+// Services
+import { ClientService } from '../../../services/client/client.service';
 
 @Component({
   selector: 'edit-client',
@@ -12,13 +17,19 @@ export class EditClientComponent implements OnInit {
   @Output() onCancel: EventEmitter<any> = new EventEmitter();
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private clientService: ClientService) { }
 
   ngOnInit() {
   }
 
   saveClicked() {
-    this.onSave.emit();
+    this.clientService.updateClient(this.selectedClient)
+      .subscribe((clients) => {
+        console.log('back in subscribe result');
+        this.onSave.emit();
+      }, (err) => {
+        console.log(err);
+      });
   }
 
   cancelClicked() {
@@ -26,7 +37,13 @@ export class EditClientComponent implements OnInit {
   }
 
   deleteClicked() {
-    this.onDelete.emit();
+    this.clientService.deleteClient(this.selectedClient.id)
+      .subscribe((clients) => {
+        console.log('back in subscribe result');
+        this.onDelete.emit();
+      }, (err) => {
+        console.log(err);
+      });
   }
 
 }
