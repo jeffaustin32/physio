@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -15,11 +15,22 @@ export class AuthService {
 
   // Store the URL so we can redirect after logging in
   public redirectUrl: string;
+  public currentUrl: string;
   private baseUrl: string = 'http://localhost:3000/api'
 
   constructor(private http: Http, private router: Router) {
+    router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe((val) => this.currentUrl = val.url);
+
     if (this.isAuthorized()) {
-      this.loggedIn.next(true);
+      if (this.currentUrl != '' && this.currentUrl != '/login') {
+        this.loggedIn.next(true);
+        this.isLoggedIn = true;
+      } else {
+        this.loggedIn.next(false);
+        this.isLoggedIn = false;
+      }
     }
   }
 
@@ -38,7 +49,8 @@ export class AuthService {
           this.isLoggedIn = true;
           this.loggedIn.next(true);
 
-          subscriber.next();
+          subscriber.next(this.redirectUrl);
+          this.redirectUrl = "";
           subscriber.complete();
         },
         (err) => {
@@ -65,6 +77,16 @@ export class AuthService {
     this.router.navigate(['/login']);
     this.isLoggedIn = false;
     this.loggedIn.next(false);
+  }
+
+  renewLogin() {
+    // ---------- replace with logout() call
+    this.router.navigate(['/login']);
+    this.isLoggedIn = false;
+    this.loggedIn.next(false);
+    // ---------------------------------------
+
+    this.redirectUrl = this.currentUrl;
   }
 
   // Check if the user data and token exist in storage

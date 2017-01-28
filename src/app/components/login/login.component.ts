@@ -40,12 +40,12 @@ export class LoginComponent implements OnInit {
   login() {
     this.errorMessage = "";
     this.authService.login(this.credentials)
-      .subscribe(() => {
+      .subscribe((redirectUrl) => {
         // Remove the logging in message
         this.loggingIn = false;
 
         // If no redirect has been set, use the default
-        let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
+        let redirect = redirectUrl || '/dashboard';
 
         // Redirect the user
         this.router.navigate([redirect]);

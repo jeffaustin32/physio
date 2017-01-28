@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ClientModel } from '../../models/client/client.model';
 import { CoordinatesModel } from '../../models/coordinates.model';
+import { AuthService } from '../auth/auth.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
@@ -13,7 +14,7 @@ import 'rxjs/add/operator/map';
 export class ClientService {
   private baseUrl: string = 'http://localhost:3000/api'
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authService: AuthService) { }
 
   // Get all the clients
   getAllClients() {
@@ -32,6 +33,9 @@ export class ClientService {
           subscriber.complete();
         },
         (err) => {
+          if (err.status === 401) {
+            this.authService.renewLogin();
+          }
           // Internal Server Error
           subscriber.error('Yikes! Looks like there was a server error.')
         });

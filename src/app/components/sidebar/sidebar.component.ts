@@ -24,9 +24,11 @@ import 'rxjs/add/operator/filter';
 export class SidebarComponent implements OnInit {
   private menuItems: any[] = MENU_ITEMS;
   private isLoggedIn: boolean = false;
-  
+
   constructor(private router: Router, private authService: AuthService) {
-    this.authService.loggedIn.subscribe(status => this.isLoggedIn = status);
+    this.authService.loggedIn.subscribe(status => {
+      this.isLoggedIn = status;
+    });
   }
 
   ngOnInit() {
