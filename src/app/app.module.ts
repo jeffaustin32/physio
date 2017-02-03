@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 
 // Content components
 import { LoginComponent } from './components/login/login.component';
+import { MapsComponent } from './components/maps/maps.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { InvoiceModule, invoiceModuleRoutes } from './components/invoices/invoice.module';
 import { DashboardModule, dashboardModuleRoutes } from './components/dashboard/dashboard.module';
@@ -28,6 +29,7 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     SidebarComponent,
     LoginComponent,
+    MapsComponent,
     HeaderComponent,
     NotFoundComponent
   ],
@@ -48,6 +50,7 @@ import { SharedModule } from './shared/shared.module';
     RouterModule.forRoot(accountModuleRoutes),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
+      { path: 'maps', component: MapsComponent },      
       { path: '404', component: NotFoundComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: '404'}

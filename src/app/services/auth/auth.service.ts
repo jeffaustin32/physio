@@ -44,8 +44,12 @@ export class AuthService {
         .map(res => res.json())
         .subscribe(
         (res) => {
+          
+          console.log(res);
+
           // Store the token in local storage
-          localStorage.setItem('token', JSON.stringify(res.data));
+          localStorage.setItem('token', JSON.stringify(res.data.token));
+          localStorage.setItem('practitioner', JSON.stringify(res.data.practitioner));
           this.isLoggedIn = true;
           this.loggedIn.next(true);
 
@@ -80,12 +84,7 @@ export class AuthService {
   }
 
   renewLogin() {
-    // ---------- replace with logout() call
-    this.router.navigate(['/login']);
-    this.isLoggedIn = false;
-    this.loggedIn.next(false);
-    // ---------------------------------------
-
+    this.logout();
     this.redirectUrl = this.currentUrl;
   }
 
