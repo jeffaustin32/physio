@@ -9,9 +9,6 @@ import { ClientModel } from '../../../models/client/client.model';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-  private selectedClient:ClientModel;
-  private editMode:boolean = false;
-
   constructor(private router: Router) {
   }
 
@@ -20,10 +17,6 @@ export class ClientComponent implements OnInit {
   }
 
   selectionChange(client) {
-    this.selectedClient = client;
-  }
-
-  changeMode() {
-    this.editMode = !this.editMode;
+    this.router.navigate(['/client/' + client.id]);
   }
 }

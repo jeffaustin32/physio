@@ -39,8 +39,8 @@ export class HeaderComponent implements OnInit {
 
     this.router.events
       .filter(event => event instanceof NavigationEnd)
-      .map(event => event.url.match(/[^\/]+/).reduce((component, acc) => acc.concat(component[0] || ""), ""))
-      .subscribe(url => this.title = url.charAt(0).toUpperCase() + url.slice(1));
-
+      .map(event => event as NavigationEnd)
+      .map(event => event.urlAfterRedirects.match(/[^\/]+/))
+      .subscribe(url => this.title = url[0].charAt(0).toUpperCase() + url[0].slice(1));
   }
 }

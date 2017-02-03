@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, trigger, state, style, transition, animate, keyframes, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Services
@@ -10,7 +10,23 @@ import { ClientModel } from '../../models/client/client.model';
 @Component({
   selector: 'clients-list',
   templateUrl: './clients-list.component.html',
-  styleUrls: ['./clients-list.component.css']
+  styleUrls: ['./clients-list.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('*', style({
+        opacity: 1
+      })),
+      state('void', style({
+        opacity: 0
+      })),
+      transition('void => *', [
+        animate('100ms ease-in'),
+      ]),
+      transition('* => void', [
+        animate('100ms ease-out')
+      ])
+    ])
+  ]
 })
 
 export class ClientsListComponent implements OnInit {

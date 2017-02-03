@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ClientModel } from '../../models/client/client.model';
-import { CoordinatesModel } from '../../models/coordinates.model';
-import { AuthService } from '../auth/auth.service';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
+import { ClientModel } from '../../models/client/client.model';
+import { CoordinatesModel } from '../../models/coordinates.model';
+import { AuthService } from '../auth/auth.service';
+import { BASE_URL, createAuthorizationHeader } from '../../shared/service.options';
 
 @Injectable()
 export class ClientService {
-  private baseUrl: string = 'http://localhost:3000/api'
-
   constructor(private http: Http, private authService: AuthService) { }
 
   // Get all the clients
   getAllClients() {
     return Observable.create((subscriber) => {
-      this.http.get(this.baseUrl + '/client',
-        { headers: this.createAuthorizationHeader() })
+      this.http.get(BASE_URL + '/client',
+        { headers: createAuthorizationHeader() })
         .map(res => res.json())
         .subscribe(
         (res) => {
@@ -43,15 +41,43 @@ export class ClientService {
   }
 
   // Get a single client by their ID
-  getAClient(clientId: number) {
+  getClient(clientId: number) {
     return Observable.create((subscriber) => {
-      this.http.get(this.baseUrl + '/client/' + clientId.toString(),
-        { headers: this.createAuthorizationHeader() })
+      this.http.get(BASE_URL + '/client/' + clientId.toString(),
+        { headers: createAuthorizationHeader() })
         .map(res => res.json())
         .subscribe(
         (res) => {
           console.log(res);
           subscriber.next(res.data);
+          subscriber.complete();
+        },
+        (err) => {
+          // Token has expired or user is not authorized to view
+          if (err.status === 401) {
+            this.authService.renewLogin();
+          }
+          // Not Found
+          if (err.status === 404) {
+            subscriber.error('This client doesn\'t exist');
+          }
+          // Internal Server Error
+          else {
+            subscriber.error('Yikes! Looks like there was a server error.');
+          }
+        });
+    });
+  }
+
+  // Create a client
+  createClient(client: ClientModel) {
+    return Observable.create((subscriber) => {
+      this.http.post(BASE_URL + '/client/' + client.id.toString(), JSON.stringify({ client: client }), { headers: createAuthorizationHeader() })
+        .map(res => res.json())
+        .subscribe(
+        (res) => {
+          client.id = res.data;
+          subscriber.next(client);
           subscriber.complete();
         },
         (err) => {
@@ -69,9 +95,8 @@ export class ClientService {
 
   // Update a client
   updateClient(client: ClientModel) {
-    console.log('client', client);
     return Observable.create((subscriber) => {
-      this.http.put(this.baseUrl + '/client/' + client.id.toString(), JSON.stringify({ client: client }), { headers: this.createAuthorizationHeader() })
+      this.http.put(BASE_URL + '/client/' + client.id.toString(), JSON.stringify({ client: client }), { headers: createAuthorizationHeader() })
         .map(res => res.json())
         .subscribe(
         (res) => {
@@ -95,7 +120,7 @@ export class ClientService {
   // Update a client
   deleteClient(clientId: number) {
     return Observable.create((subscriber) => {
-      this.http.delete(this.baseUrl + '/client/' + clientId.toString(), { headers: this.createAuthorizationHeader() })
+      this.http.delete(BASE_URL + '/client/' + clientId.toString(), { headers: createAuthorizationHeader() })
         .map(res => res.json())
         .subscribe(
         (res) => {
@@ -116,10 +141,5 @@ export class ClientService {
     });
   }
 
-  // Create an Authorization header to allow access to secured server endpoints
-  createAuthorizationHeader(): Headers {
-    let token: string = JSON.parse(localStorage.getItem('token'));
-    let header = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-    return header;
-  }
+
 }

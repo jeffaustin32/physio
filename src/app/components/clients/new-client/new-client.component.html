@@ -1,17 +1,17 @@
-  <card header="Edit Client">
+  <card header="Create New Client">
      <div class="content">
         <form>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" class="form-control" placeholder="Company" [(ngModel)]="selectedClient.firstName" name="firstName">
+                        <input type="text" class="form-control" placeholder="Company" [(ngModel)]="newClient.firstName" name="firstName">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="selectedClient.lastName" name="lastName">
+                        <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="newClient.lastName" name="lastName">
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Address</label>
-                        <input type="text" class="form-control" placeholder="Home Address" [(ngModel)]="selectedClient.address" name="address">
+                        <input type="text" class="form-control" placeholder="Home Address" [(ngModel)]="newClient.address" name="address">
                     </div>
                 </div>
             </div>
@@ -29,19 +29,19 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>City</label>
-                        <input type="text" class="form-control" placeholder="City" [(ngModel)]="selectedClient.city" name="city">
+                        <input type="text" class="form-control" placeholder="City" [(ngModel)]="newClient.city" name="city">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Province</label>
-                        <input type="text" class="form-control" placeholder="Province" [(ngModel)]="selectedClient.province" name="province">
+                        <input type="text" class="form-control" placeholder="Province" [(ngModel)]="newClient.province" name="province">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Postal Code</label>
-                        <input type="text" class="form-control" placeholder="Postal Code" [(ngModel)]="selectedClient.postalCode" name="postalCode">
+                        <input type="text" class="form-control" placeholder="Postal Code" [(ngModel)]="newClient.postalCode" name="postalCode">
                     </div>
                 </div>
             </div>
@@ -50,19 +50,19 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Home Phone</label>
-                        <input type="text" class="form-control" placeholder="Home Phone" [(ngModel)]="selectedClient.homePhone" name="homePhone">
+                        <input type="text" class="form-control" placeholder="Home Phone" [(ngModel)]="newClient.homePhone" name="homePhone">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Cell Phone</label>
-                        <input type="text" class="form-control" placeholder="Cell Phone" [(ngModel)]="selectedClient.cellPhone" name="cellPhone">
+                        <input type="text" class="form-control" placeholder="Cell Phone" [(ngModel)]="newClient.cellPhone" name="cellPhone">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="selectedClient.email" name="email">
+                        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="newClient.email" name="email">
                     </div>
                 </div>
             </div>
@@ -71,14 +71,13 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Notes about client</label>
-                        <textarea rows="5" class="form-control" placeholder="Notes" [(ngModel)]="selectedClient.notes" name="notes"></textarea>
+                        <textarea rows="5" class="form-control" placeholder="Notes" [(ngModel)]="newClient.notes" name="notes"></textarea>
                     </div>
                 </div>
             </div>
             
-            <button type="button" class="btn btn-danger btn-fill" (click)="deleteClicked()">Delete</button>
             <button type="button" class="btn btn-warning btn-fill" (click)="cancelClicked()">Cancel</button>
-            <button type="button" class="btn btn-info btn-fill pull-right" (click)="saveClicked()">Save</button>
+            <button type="button" class="btn btn-info btn-fill pull-right" (click)="createClicked()">Create New Client</button>
             <div class="clearfix"></div>
         </form>
      </div>

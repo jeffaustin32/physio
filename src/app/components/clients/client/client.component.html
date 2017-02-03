@@ -1,24 +1,22 @@
-<div class="row" *ngIf="!editMode">
+<div class="row">
   <clients-list 
-    class="col-md-4"
+    class="col-md-8"
     (selectionChange)="selectionChange($event)">
   </clients-list>
 
-  <selected-client 
-    *ngIf="selectedClient" 
-    [selectedClient]="selectedClient" 
-    class="col-md-8" 
-    (onEdit)="changeMode()">
-  </selected-client>
-</div>
-
-<div class="row">
-  <edit-client 
-    *ngIf="editMode" 
-    [selectedClient]="selectedClient" 
-    class="col-md-12" 
-    (onDelete)="changeMode()" 
-    (onCancel)="changeMode()"
-    (onSave)="changeMode()">
-  </edit-client>
+  <div class="col-md-4">
+    <div class="row">
+      <card class="col-md-12" header="Create New Client">
+        <button 
+          class="btn btn-info btn-fill" 
+          [routerLink]="['/client/new']">
+            Create New Client
+        </button>
+      </card>
+    </div>
+    <div class="row">
+      <client-summary class="col-md-12">
+      </client-summary>
+    </div>
+  </div>
 </div>

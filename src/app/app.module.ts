@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 
 // Content components
 import { LoginComponent } from './components/login/login.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { InvoiceModule, invoiceModuleRoutes } from './components/invoices/invoice.module';
 import { DashboardModule, dashboardModuleRoutes } from './components/dashboard/dashboard.module';
 import { ClientModule, clientModuleRoutes } from './components/clients/client.module';
@@ -27,7 +28,8 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     SidebarComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    NotFoundComponent
   ],
   imports: [
     SharedModule,
@@ -46,8 +48,9 @@ import { SharedModule } from './shared/shared.module';
     RouterModule.forRoot(accountModuleRoutes),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
+      { path: '404', component: NotFoundComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: '**', redirectTo: 'login' }
+      { path: '**', redirectTo: '404'}
     ])
   ],
   providers: [AuthService, AuthGuard],

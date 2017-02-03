@@ -8,6 +8,7 @@ import { ClientComponent } from './client/client.component';
 import { SharedModule } from '../../shared/shared.module';
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { SelectedClientComponent } from './selected-client/selected-client.component';
+import { NewClientComponent } from './new-client/new-client.component';
 
 // Services
 import { AuthGuard } from '../../services/auth-guard/auth-guard.service';
@@ -20,36 +21,26 @@ import { CoordinatesModel } from '../../models/coordinates.model';
 // Pipes
 import { TextFilterPipe } from '../../pipes/textfilter.pipe';
 
-// export const clientModuleRoutes: Route[] = [
-//   {
-//     path: 'client',
-//     component: ClientComponent,
-//     canActivate: [AuthGuard],
-//     children: [
-//       {
-//         path: 'details/:id',
-//         component: EditClientComponent,
-//         outlet: 'client'
-//       },
-//       {
-//         path: 'edit/:id',
-//         component: EditClientComponent,
-//         outlet: 'client'
-//       },
-//       {
-//         path: 'thirdParty/:id',
-//         component: EditClientComponent,
-//         outlet: 'client'
-//       }
-//     ]
-//   }
-// ];
-
 export const clientModuleRoutes: Route[] = [
   {
     path: 'client',
     canActivate: [AuthGuard],
     component: ClientComponent
+  },
+  {
+    path: 'client/new',
+    canActivate: [AuthGuard],
+    component: NewClientComponent
+  },
+  {
+    path: 'client/:id',
+    canActivate: [AuthGuard],
+    component: SelectedClientComponent
+  },
+  {
+    path: 'client/:id/edit',
+    canActivate: [AuthGuard],
+    component: EditClientComponent
   }
 ];
 
@@ -57,7 +48,8 @@ export const clientModuleRoutes: Route[] = [
   declarations: [
     ClientComponent,
     EditClientComponent,
-    SelectedClientComponent
+    SelectedClientComponent,
+    NewClientComponent
   ],
   imports: [
     FormsModule,
