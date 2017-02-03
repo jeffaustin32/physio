@@ -71,24 +71,21 @@ export class ClientService {
 
   // Create a client
   createClient(client: ClientModel) {
+    console.log(client);
     return Observable.create((subscriber) => {
-      this.http.post(BASE_URL + '/client/' + client.id.toString(), JSON.stringify({ client: client }), { headers: createAuthorizationHeader() })
+      this.http.post(BASE_URL + '/client/', JSON.stringify({ client: client }), { headers: createAuthorizationHeader() })
         .map(res => res.json())
         .subscribe(
         (res) => {
+          console.log(res);
           client.id = res.data;
           subscriber.next(client);
           subscriber.complete();
         },
         (err) => {
-          // Not Found
-          if (err.status === 404) {
-            subscriber.error('This client doesn\'t exist');
-          }
+          console.log(err);
           // Internal Server Error
-          else {
-            subscriber.error('Yikes! Looks like there was a server error.');
-          }
+          subscriber.error('Yikes! Looks like there was a server error.');
         });
     });
   }

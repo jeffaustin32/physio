@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule, Route } from '@angular/router';
 
 // Components
@@ -55,7 +55,8 @@ export const clientModuleRoutes: Route[] = [
     FormsModule,
     SharedModule,
     RouterModule,
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [
     ClientService,
