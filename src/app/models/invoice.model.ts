@@ -1,5 +1,5 @@
-import { SessionModel } from '../session/session.model';
-import { InvoiceItemModel } from '../invoice-item/invoice-item.model';
+import { SessionModel } from './session.model';
+import { InvoiceItemModel } from './invoice-item.model';
 
 export class InvoiceModel {
     constructor(

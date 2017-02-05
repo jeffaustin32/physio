@@ -1,141 +1,177 @@
   <card header="Create New Client">
      <div class="content">
         <form novalidate [formGroup]="client" (ngSubmit)="onSubmit(client, client.isValid)">
-            <div class="row">
-                <div class="col-md-6">
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-6">
 
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <div class="input-group">
-                        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName"> 
-                            <div class="input-group-addon row">
-                                <div style="color:#FF0000;" 
-                                *ngIf="!client.controls.firstName.valid && client.controls.firstName.touched">
-                                Required</div>
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="First Name" formControlName="firstName"> 
+                                <div class="input-group-addon row">
+                                    <div style="color:#FF0000;" 
+                                    *ngIf="!client.controls.firstName.valid && client.controls.firstName.touched">
+                                    Required</div>
+                                </div>
                             </div>
                         </div>
+                                            
                     </div>
-                                        
-                </div>
-                <div class="col-md-6">
+                    <div class="col-md-6">
 
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName"> 
-                            <div class="input-group-addon row">
-                                <div style="color:#FF0000;" 
-                                *ngIf="!client.controls.lastName.valid && client.controls.lastName.touched">
-                                Required</div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName"> 
+                                <div class="input-group-addon row">
+                                    <div style="color:#FF0000;" 
+                                    *ngIf="!client.controls.lastName.valid && client.controls.lastName.touched">
+                                    Required</div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
 
-                    <div class="form-group">
-                        <label for="address">Last Name</label>
-                        <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Address" formControlName="address"> 
-                            <div class="input-group-addon row">
-                                <div style="color:#FF0000;" 
-                                *ngIf="!client.controls.address.valid && client.controls.address.touched">
-                                Required</div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Address" formControlName="address"> 
+                                <div class="input-group-addon row">
+                                    <div style="color:#FF0000;" 
+                                    *ngIf="!client.controls.address.valid && client.controls.address.touched">
+                                    Required</div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4">
 
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <div class="input-group">
-                        <input type="text" class="form-control" placeholder="city" formControlName="city"> 
-                            <div class="input-group-addon row">
-                                <div style="color:#FF0000;" 
-                                *ngIf="!client.controls.city.valid && client.controls.city.touched">
-                                Required</div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="city" formControlName="city"> 
+                                <div class="input-group-addon row">
+                                    <div style="color:#FF0000;" 
+                                    *ngIf="!client.controls.city.valid && client.controls.city.touched">
+                                    Required</div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
+                    <div class="col-md-4">
+                        
+                        <div class="form-group">
+                            <label for="province">Province</label>
+                            <select class="form-control" formControlName="province">
+                                <option>AB</option>
+                                <option selected="selected">BC</option>
+                                <option>MB</option>
+                                <option>NB</option>
+                                <option>NL</option>
+                                <option>NS</option>
+                                <option>NT</option>
+                                <option>NU</option>
+                                <option>ON</option>
+                                <option>PE</option>
+                                <option>QC</option>
+                                <option>SK</option>
+                                <option>YT</option>
+                            </select>
+                        </div>
 
-                </div>
-                <div class="col-md-4">
-                    
-                    <div class="form-group">
-                        <label for="province">Province</label>
-                        <select class="form-control">
-                            <option>AB</option>
-                            <option selected="selected">BC</option>
-                            <option>MB</option>
-                            <option>NB</option>
-                            <option>NL</option>
-                            <option>NS</option>
-                            <option>NT</option>
-                            <option>NU</option>
-                            <option>ON</option>
-                            <option>PE</option>
-                            <option>QC</option>
-                            <option>SK</option>
-                            <option>YT</option>
-                        </select>
                     </div>
+                    <div class="col-md-4">
 
-                </div>
-                <div class="col-md-4">
-
-                    <div class="form-group">
-                        <label for="postalCode">Postal Code</label>
-                        <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Postal Code" formControlName="postalCode"> 
-                            <div class="input-group-addon row">
-                                <div style="color:#FF0000;" 
-                                *ngIf="!client.controls.postalCode.valid && client.controls.postalCode.touched">
-                                {{ formErrors.postalCode }}</div>
+                        <div class="form-group">
+                            <label for="postalCode">Postal Code</label>
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Postal Code" formControlName="postalCode"> 
+                                <div class="input-group-addon row">
+                                    <div style="color:#FF0000;" 
+                                    *ngIf="!client.controls.postalCode.valid && client.controls.postalCode.touched">
+                                    {{ formErrors.postalCode }}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-            </div>
+            </fieldset>
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Home Phone</label>
-                        <input type="text" class="form-control" placeholder="Home Phone" formControlName="homePhone">
+            <fieldset>
+                <legend></legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Home Phone</label>
+                            <input type="text" class="form-control" placeholder="Home Phone" formControlName="homePhone">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Cell Phone</label>
+                            <input type="text" class="form-control" placeholder="Cell Phone" formControlName="cellPhone">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Cell Phone</label>
-                        <input type="text" class="form-control" placeholder="Cell Phone" formControlName="cellPhone">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" placeholder="Email" formControlName="email">
-                    </div>
-                </div>
-            </div>
+            </fieldset>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Notes about client</label>
-                        <textarea rows="5" class="form-control" placeholder="Notes" formControlName="notes"></textarea>
+            <fieldset>
+                <legend></legend>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Notes about client</label>
+                            <textarea rows="5" class="form-control" placeholder="Notes" formControlName="notes"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend></legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Prefered Billing Method</label> 
+                            <select class="form-control" formControlName="billingMethod">
+                                <option selected="selected">In Person</option>
+                                <option>Email</option>
+                                <option>Mail</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Default Session Rate</label>
+                            <input type="number" class="form-control" placeholder="Session Rate" formControlName="sessionRate" min="0">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Default Mileage Rate</label>
+                            <input type="number" class="form-control" placeholder="Mileage Rate" formControlName="mileageRate" min="0">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
             
             <button type="button" class="btn btn-warning btn-fill" (click)="cancelClicked()">Cancel</button>
             <button type="submit" class="btn btn-info btn-fill pull-right" [disabled]="!client.valid">Create New Client</button>

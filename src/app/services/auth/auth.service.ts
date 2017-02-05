@@ -4,7 +4,6 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 

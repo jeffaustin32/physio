@@ -1,4 +1,4 @@
-import { CoordinatesModel } from '../coordinates.model';
+import { CoordinatesModel } from './coordinates.model';
 
 export class ClientModel {
     constructor(

@@ -1,31 +1,92 @@
-<card header="Client Details">
-    <div class="content" *ngIf="selectedClient">
-
-        <div class="row">
-            <div class="col-md-6">
-                {{ selectedClient.firstName }} {{ selectedClient.lastName }}
-            </div>
-            <div class="col-md-6">
-                {{ selectedClient.address }}
-                {{ selectedClient.city }}
-                {{ selectedClient.province }}
-                {{ selectedClient.postalCode }}
-            </div>
+<div class="row">
+    <card header="{{selectedClient?.firstName}} {{selectedClient?.lastName}}" class="col-md-12"></card>
+</div>
+<div class="row">
+    <card header="Location" class="col-md-4">
+        {{ selectedClient?.address }} {{ selectedClient?.city }} {{ selectedClient?.province }} {{ selectedClient?.postalCode }}
+    </card>
+    <card header="Contact" class="col-md-4">
+        {{ selectedClient?.homePhone }} {{ selectedClient?.cellPhone }} {{ selectedClient?.fax }} {{ selectedClient?.email }}
+    </card>
+    <card header="Notes" class="col-md-4">
+        {{ selectedClient?.notes }}
+    </card>
+</div>
+<div class="row">
+    <card header="Sessions" class="col-md-6">
+        <div class="table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <th>Date</th>
+                    <th>Address</th>
+                    <th>Balance</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Some day</td>
+                        <td>Other details</td>
+                        <td>More</td>
+                    </tr>
+                    <tr>
+                        <td>Some day</td>
+                        <td>Other details</td>
+                        <td>More</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </card>
+    <card header="Invoices" class="col-md-6">
+        <table class="table table-hover table-striped">
+            <thead>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Invoice Total</th>
+                <th>Payment Total</th>
+                <th>Amount owing</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Some day</td>
+                    <td>123</td>
+                    <td>152</td>
+                    <td>123</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Some day</td>
+                    <td>123</td>
+                    <td>152</td>
+                    <td>123</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Some day</td>
+                    <td>123</td>
+                    <td>152</td>
+                    <td>123</td>
+                </tr>
+            </tbody>
+        </table>
+    </card>
+</div>
 
-        <div class="row">
-            <div class="col-md-6">
-                {{ selectedClient.homePhone }}
-                {{ selectedClient.cellPhone }}
-                {{ selectedClient.fax }}
-                {{ selectedClient.email }}
-            </div>
-            <div class="col-md-6">
-                {{ selectedClient.notes }}
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-info btn-fill pull-right" (click)="editClicked()">Edit</button>
-        <div class="clearfix"></div>
-    </div>
+<card header="">
+    <button type="button" class="btn btn-danger btn-fill" (click)="modal.show()">Delete Client</button>
+    <button type="submit" class="btn btn-info btn-fill pull-right" (click)="onEdit()">Edit Client</button>
+    <div class="clearfix"></div>
 </card>
+
+<app-modal>
+    <div class="app-modal-header">
+        Delete Client
+    </div>
+    <div class="app-modal-body">
+        Are you sure you want to delete
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-default btn-fill" (click)="modal.hide()">Cancel</button>
+        <button type="button" class="btn btn-danger btn-fill" (click)="onDelete()">Delete Client</button>
+    </div>
+</app-modal>

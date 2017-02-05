@@ -7,6 +7,7 @@ import { CardComponent } from './card/card.component';
 import { ClientsListComponent } from './clients-list/clients-list.component';
 import { ClientSummaryComponent } from './summary-cards/client-summary/client-summary.component';
 import { InvoiceSummaryComponent } from './summary-cards/invoice-summary/invoice-summary.component';
+import { ModalComponent } from './modal.component';
 
 // Pipes
 import { TextFilterPipe } from '../pipes/textfilter.pipe';
@@ -23,7 +24,8 @@ import { SessionSummaryComponent } from './summary-cards/session-summary/session
     ClientsListComponent,
     ClientSummaryComponent,
     InvoiceSummaryComponent,
-    SessionSummaryComponent
+    SessionSummaryComponent,
+    ModalComponent
   ],
   exports: [
     CardComponent,
@@ -31,7 +33,8 @@ import { SessionSummaryComponent } from './summary-cards/session-summary/session
     ClientSummaryComponent,
     InvoiceSummaryComponent,
     SessionSummaryComponent,
-    TextFilterPipe
+    TextFilterPipe,
+    ModalComponent
   ]
 })
 export class SharedModule { }

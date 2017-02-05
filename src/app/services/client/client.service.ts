@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
-import { ClientModel } from '../../models/client/client.model';
+import { ClientModel } from '../../models/client.model';
 import { CoordinatesModel } from '../../models/coordinates.model';
 import { AuthService } from '../auth/auth.service';
 import { BASE_URL, createAuthorizationHeader } from '../../shared/service.options';
@@ -42,13 +42,13 @@ export class ClientService {
 
   // Get a single client by their ID
   getClient(clientId: number) {
+    console.log('in get cilent');
     return Observable.create((subscriber) => {
       this.http.get(BASE_URL + '/client/' + clientId.toString(),
         { headers: createAuthorizationHeader() })
         .map(res => res.json())
         .subscribe(
         (res) => {
-          console.log(res);
           subscriber.next(res.data);
           subscriber.complete();
         },

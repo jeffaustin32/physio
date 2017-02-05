@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from '../../../services/invoice/invoice.service';
-import { InvoiceModel } from '../../../models/invoice/invoice.model';
+import { InvoiceModel } from '../../../models/invoice.model';
 
 @Component({
   selector: 'app-invoice',

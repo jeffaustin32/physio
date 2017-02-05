@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
-import { SessionModel } from '../../models/session/session.model';
+import { SessionModel } from '../../models/session.model';
 import { AuthService } from '../auth/auth.service';
 import { BASE_URL, createAuthorizationHeader } from '../../shared/service.options';
 

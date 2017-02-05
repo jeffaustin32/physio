@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ClientService } from '../../services/client/client.service';
 
 // Models
-import { ClientModel } from '../../models/client/client.model';
+import { ClientModel } from '../../models/client.model';
 
 @Component({
   selector: 'clients-list',
@@ -40,6 +40,7 @@ export class ClientsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('on init');
     this.clientService.getAllClients()
       .subscribe((clients) => {
         this.clients = clients;
