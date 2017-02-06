@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 import { ClientModel } from '../../../models/client.model';
 import { ClientService } from '../../../services/client/client.service';
@@ -16,7 +16,7 @@ export class SelectedClientComponent implements OnInit {
   public readonly modal: ModalComponent;
   private selectedClient: ClientModel;
 
-  constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private notificationService: NotificationsService) { }
 
   ngOnInit() {
     // Get the client id from the route parameters
@@ -29,14 +29,13 @@ export class SelectedClientComponent implements OnInit {
           console.log(err);
         });
     });
-
-
   }
 
   onDelete() {
     // Delete the client
     this.clientService.deleteClient(this.selectedClient.id)
       .subscribe((client) => {
+        this.notificationService.success("Success", this.selectedClient.firstName + " " + this.selectedClient.lastName + " was deleted.");
         this.router.navigate(['/client/']);
       }, (err) => {
         console.log(err);

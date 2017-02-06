@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
-
+import { SimpleNotificationsModule } from 'angular2-notifications';
 // Services
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth-guard/auth-guard.service';
@@ -36,6 +36,7 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     SharedModule,
     BrowserModule,
+    SimpleNotificationsModule.forRoot(),
     FormsModule,
     HttpModule,
     InvoiceModule,

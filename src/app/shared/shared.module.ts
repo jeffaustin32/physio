@@ -37,4 +37,5 @@ import { SessionSummaryComponent } from './summary-cards/session-summary/session
     ModalComponent
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}
