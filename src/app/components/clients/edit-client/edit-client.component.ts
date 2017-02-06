@@ -34,10 +34,11 @@ export class EditClientComponent implements OnInit {
   saveClicked() {
     this.clientService.updateClient(this.selectedClient)
       .subscribe((clients) => {
-        this.notificationService.success("Success", this.selectedClient.firstName + " " + this.selectedClient.lastName + " was updated.");
+        this.notificationService.success("Success", "Updated client details for " + this.selectedClient.firstName + " " + this.selectedClient.lastName);
         this.router.navigate(['/client/']);
       }, (err) => {
         console.log(err);
+        this.notificationService.error("Error", "Failed to update client details for " + this.selectedClient.firstName + " " + this.selectedClient.lastName);
       });
   }
 

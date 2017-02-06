@@ -10,6 +10,7 @@ import { CoordinatesModel } from '../../../models/coordinates.model';
 // Services
 import { ClientService } from '../../../services/client/client.service';
 import { MapsService } from '../../../services/maps/maps.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'new-client',
@@ -20,7 +21,7 @@ export class NewClientComponent implements OnInit {
   private client: FormGroup;
 
   // Form error messages
-  formErrors = { 'postalCode': '' };
+  formErrors = { 'postalCode': 'Required' };
   validationMessages = {
     'postalCode': {
       'required': 'Required',
@@ -28,7 +29,7 @@ export class NewClientComponent implements OnInit {
     }
   };
 
-  constructor(private clientService: ClientService, private mapsService: MapsService, private router: Router, private fb: FormBuilder) { }
+  constructor(private clientService: ClientService, private mapsService: MapsService, private router: Router, private fb: FormBuilder, private notificationService: NotificationsService) { }
 
   ngOnInit() {
     // Instantiate a new form builder group
@@ -37,20 +38,22 @@ export class NewClientComponent implements OnInit {
       lastName: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
-      province: ['', Validators.required],
+      province: ['BC', Validators.required],
       postalCode: ['', [Validators.required, Validators.pattern(/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/)]],
       homePhone: [''],
       cellPhone: [''],
       email: [''],
-      mileageRate: [''],
-      sessionRate: [''],
-      billingMethod: ['', Validators.required],
+      mileageRate: [null],
+      sessionRate: [null],
+      billingMethod: ['Email', Validators.required],
       notes: ['']
-    })
+    });
 
     // Listen for input changes to display appropriate errors
     this.client.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+      .subscribe(data => {
+        this.onValueChanged(data);
+      });
     this.onValueChanged(); // (re)set validation messages now
   }
 
@@ -72,35 +75,15 @@ export class NewClientComponent implements OnInit {
     }
   }
 
+  // Create the new client
   onSubmit({value, valid}: { value: ClientModel, valid: boolean }) {
-    let practitioner = JSON.parse(localStorage.getItem('practitioner'));
-
-    let practitionerAddress = practitioner.address + ', ' + practitioner.city + ', ' + practitioner.province;
-    let newClientAddress = value.address + ', ' + value.city + ', ' + value.province;
-
-    Observable.forkJoin([this.mapsService.geocode(newClientAddress), this.mapsService.distance(practitionerAddress, newClientAddress)])
-      .subscribe(data => {
-        // Get the coordinate 
-        value.latLng = data[0] as CoordinatesModel;
-        // Get the distance
-        value.distance = 0;
-        let distance: any = data[1] as any;        
-        if (distance.rows[0] && distance.rows[0].elements[0]) {
-          value.distance = distance.rows[0].elements[0].distance.value / 1000;
-        }
-        
-        // Got the required data, create the new client
-        this.createClient(value);
-      });
-  }
-
-  createClient(client: ClientModel) {
-    this.clientService.createClient(client)
+    this.clientService.createClient(value)
       .subscribe((client) => {
-        console.log('Client created successfully!');
+        this.notificationService.success("Success", "Added " + value.firstName + " " + value.lastName + " as a new client");
+        console.log('client', client);
         this.router.navigate(['/client/']);
       }, (err) => {
-        console.log('created client failed');
+        this.notificationService.error("Error", "Failed to add " + value.firstName + " " + value.lastName + " as a new client");
         console.log(err);
       });
   }

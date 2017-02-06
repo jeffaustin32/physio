@@ -27,6 +27,9 @@ export class ClientService {
             return new ClientModel(client.id, client.firstName, client.lastName, client.address, client.postalCode, client.city, client.province, client.homePhone, client.cellPhone, client.fax, client.email, client.billingMethod, client.sessionRate, client.distance, client.mileageRate, new CoordinatesModel(client.latLng.coordinates[0], client.latLng.coordinates[1]), client.notes, [], client.active);
           });
 
+          // Store the clients locally
+          localStorage.setItem('clients', JSON.stringify(res.data));
+
           subscriber.next(res.data);
           subscriber.complete();
         },
@@ -71,19 +74,26 @@ export class ClientService {
 
   // Create a client
   createClient(client: ClientModel) {
-    console.log(client);
+    // Get the practitioners latlng to calculate distance to new client
+    let practitionerLatLng = JSON.parse(localStorage.getItem('practitioner')).latLng;
+
     return Observable.create((subscriber) => {
-      this.http.post(BASE_URL + '/client/', JSON.stringify({ client: client }), { headers: createAuthorizationHeader() })
+      this.http.post(BASE_URL + '/client/', JSON.stringify({ client: client, latLng: practitionerLatLng }), { headers: createAuthorizationHeader() })
         .map(res => res.json())
         .subscribe(
         (res) => {
-          console.log(res);
           client.id = res.data;
+
+          // Store the new client locally
+          let clients = JSON.parse(localStorage.getItem('clients'));
+          clients.push(client);
+          localStorage.setItem('clients', JSON.stringify(clients));
+
           subscriber.next(client);
           subscriber.complete();
         },
         (err) => {
-          console.log(err);
+          console.error(err);
           // Internal Server Error
           subscriber.error('Yikes! Looks like there was a server error.');
         });
@@ -121,7 +131,6 @@ export class ClientService {
         .map(res => res.json())
         .subscribe(
         (res) => {
-          console.log('success', res);
           subscriber.next(res.data);
           subscriber.complete();
         },

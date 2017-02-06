@@ -40,9 +40,12 @@ export class ClientsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('on init');
+    // Get locally stored clients until server responds
+    this.clients = JSON.parse(localStorage.getItem('clients')) || [];
+
     this.clientService.getAllClients()
       .subscribe((clients) => {
+        console.log('got clients??', clients);
         this.clients = clients;
       }, (err) => {
         console.log(err);

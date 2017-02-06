@@ -10,9 +10,9 @@
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="First Name" formControlName="firstName"> 
                                 <div class="input-group-addon row">
-                                    <div style="color:#FF0000;" 
-                                    *ngIf="!client.controls.firstName.valid && client.controls.firstName.touched">
-                                    Required</div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.firstName.valid && !client.controls.firstName.touched"> * </div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.firstName.valid && client.controls.firstName.touched"> Required </div>
+                                    <div style="color:#33BB33;" *ngIf="client.controls.firstName.valid && client.controls.firstName.touched"><i class="pe-7s-check"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -25,9 +25,9 @@
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName"> 
                                 <div class="input-group-addon row">
-                                    <div style="color:#FF0000;" 
-                                    *ngIf="!client.controls.lastName.valid && client.controls.lastName.touched">
-                                    Required</div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.lastName.valid && !client.controls.lastName.touched"> * </div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.lastName.valid && client.controls.lastName.touched"> Required </div>
+                                    <div style="color:#33BB33;" *ngIf="client.controls.lastName.valid && client.controls.lastName.touched"><i class="pe-7s-check"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -43,9 +43,9 @@
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="Address" formControlName="address"> 
                                 <div class="input-group-addon row">
-                                    <div style="color:#FF0000;" 
-                                    *ngIf="!client.controls.address.valid && client.controls.address.touched">
-                                    Required</div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.address.valid && !client.controls.address.touched"> * </div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.address.valid && client.controls.address.touched"> Required </div>
+                                    <div style="color:#33BB33;" *ngIf="client.controls.address.valid && client.controls.address.touched"><i class="pe-7s-check"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -61,9 +61,9 @@
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="city" formControlName="city"> 
                                 <div class="input-group-addon row">
-                                    <div style="color:#FF0000;" 
-                                    *ngIf="!client.controls.city.valid && client.controls.city.touched">
-                                    Required</div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.city.valid && !client.controls.city.touched"> * </div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.city.valid && client.controls.city.touched"> Required </div>
+                                    <div style="color:#33BB33;" *ngIf="client.controls.city.valid && client.controls.city.touched"><i class="pe-7s-check"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -98,14 +98,14 @@
                             <div class="input-group">
                             <input type="text" class="form-control" placeholder="Postal Code" formControlName="postalCode"> 
                                 <div class="input-group-addon row">
-                                    <div style="color:#FF0000;" 
-                                    *ngIf="!client.controls.postalCode.valid && client.controls.postalCode.touched">
-                                    {{ formErrors.postalCode }}</div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.postalCode.valid && !client.controls.postalCode.touched"> * </div>
+                                    <div style="color:#FF0000;" *ngIf="!client.controls.postalCode.valid && client.controls.postalCode.touched">{{ formErrors.postalCode }}</div>
+                                    <div style="color:#33BB33;" *ngIf="client.controls.postalCode.valid && client.controls.postalCode.touched"><i class="pe-7s-check"></i></div>
                                 </div>
                             </div>
                         </div>
 
-                    </div>
+                </div>
                 </div>
             </fieldset>
 

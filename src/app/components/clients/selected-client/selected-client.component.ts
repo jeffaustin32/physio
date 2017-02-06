@@ -21,6 +21,14 @@ export class SelectedClientComponent implements OnInit {
   ngOnInit() {
     // Get the client id from the route parameters
     this.route.params.subscribe(params => {
+
+      // Get the locally stored client
+      let clients = JSON.parse(localStorage.getItem('clients')) || [];
+      clients.filter(client => client.id == +params['id']);
+      if (clients.length > 0) {
+        this.selectedClient = clients[0];
+      }
+
       // Get the client
       this.clientService.getClient(+params['id'])
         .subscribe((client) => {
