@@ -1,31 +1,9 @@
 # Physio
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.25.5.
+This project was developed to replace the existing system used to manage a Physio business.  It allows a Physiotherapist to manager their clients, sessions, and invoices.  Using geospatial data, they can also generate optimized routes and automatically calculate mileage expenses.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Demo
+An in progress demo can be found here(https://pacific-scrubland-41646.herokuapp.com).
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to GitHub Pages
-
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Server / API
+The server was created using Node.js with a PostgreSQL database.  All API requests except for login require an Authorization token.  API documents can be found here(https://documenter.getpostman.com/collection/view/813641-5781412b-c22c-9305-1f97-52908e1e6a7a#fb8c-53dd-eb95-c8cb-4ec52ccf5967).

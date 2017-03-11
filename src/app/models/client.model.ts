@@ -19,7 +19,7 @@ export class ClientModel {
         public mileageRate?: number,
         public latLng?: CoordinatesModel,
         public notes?: string,
-        public payees?: ClientModel[],
+        public thirdParty?: ClientModel,
         public active?: boolean
     ) { }
 }

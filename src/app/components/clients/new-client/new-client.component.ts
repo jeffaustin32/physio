@@ -9,7 +9,6 @@ import { CoordinatesModel } from '../../../models/coordinates.model';
 
 // Services
 import { ClientService } from '../../../services/client/client.service';
-import { MapsService } from '../../../services/maps/maps.service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -19,6 +18,8 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class NewClientComponent implements OnInit {
   private client: FormGroup;
+  private thirdParty: FormGroup;
+  private hasThirdParty: boolean;
 
   // Form error messages
   formErrors = { 'postalCode': 'Required' };
@@ -29,7 +30,7 @@ export class NewClientComponent implements OnInit {
     }
   };
 
-  constructor(private clientService: ClientService, private mapsService: MapsService, private router: Router, private fb: FormBuilder, private notificationService: NotificationsService) { }
+  constructor(private clientService: ClientService, private router: Router, private fb: FormBuilder, private notificationService: NotificationsService) { }
 
   ngOnInit() {
     // Instantiate a new form builder group
@@ -49,8 +50,24 @@ export class NewClientComponent implements OnInit {
       notes: ['']
     });
 
+    this.thirdParty = this.fb.group({
+      firstName: [''],
+      lastName: [''],
+      address: [''],
+      city: [''],
+      province: ['BC'],
+      postalCode: ['', [Validators.pattern(/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/)]],
+      homePhone: [''],
+      cellPhone: [''],
+      email: [''],
+    });
+
     // Listen for input changes to display appropriate errors
     this.client.valueChanges
+      .subscribe(data => {
+        this.onValueChanged(data);
+      });
+    this.thirdParty.valueChanges
       .subscribe(data => {
         this.onValueChanged(data);
       });

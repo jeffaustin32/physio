@@ -13,7 +13,6 @@ import { NewClientComponent } from './new-client/new-client.component';
 // Services
 import { AuthGuard } from '../../services/auth-guard/auth-guard.service';
 import { ClientService } from '../../services/client/client.service';
-import { MapsService } from '../../services/maps/maps.service';
 
 // Models
 import { ClientModel } from '../../models/client.model';
@@ -61,7 +60,6 @@ export const clientModuleRoutes: Route[] = [
   ],
   providers: [
     ClientService,
-    MapsService,
     TextFilterPipe
   ]
 })
